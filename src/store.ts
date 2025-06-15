@@ -3,6 +3,7 @@ import { thunk, ThunkMiddleware } from "redux-thunk";
 import { AnyAction } from "redux";
 import accountReducer from "./features/accounts/accountSlice";
 import customerReducer from "./features/customers/customerSlice";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootReducer = combineReducers({
   account: accountReducer,
@@ -11,7 +12,9 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk as unknown as ThunkMiddleware<RootState, AnyAction>)
+  composeWithDevTools(
+    applyMiddleware(thunk as unknown as ThunkMiddleware<RootState, AnyAction>)
+  )
 );
 
 export default store;
